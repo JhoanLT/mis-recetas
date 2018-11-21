@@ -1,0 +1,21 @@
+{
+    "name": "Mis recetas",
+    "description": "Proyecto SENA",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marlon estiven lópez",
+            "email": "panique@firemail.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload":
+    {
+        "psr-4":
+        {
+            "Mini\\" : "application/"
+        }
+    }
+}
