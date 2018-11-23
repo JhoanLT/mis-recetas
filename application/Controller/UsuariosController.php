@@ -25,4 +25,19 @@ class UsuariosController
         require APP . 'view/usuarios/index.php';
         require APP . 'view/_templates/footer.php';
     }
+    
+    /**
+     * ACCIÓN: agregarUsuario
+     * Este método se ejecuta en la siguiente ruta http://mis-recetas/usuarios/agregarUsuario
+     */
+    public function agregarUsuario()
+    {
+        // Si llegan datos por POST para crear un nuevo usuario
+        if (isset($_POST["btnAgregarUsuario"])) {
+            //Instancia el modelo de Usuario
+            $Song = new Usuario();
+            // Se ejecuta el metodo que agrega un nuevo usuario
+            $Song->agregarUsuario($_POST["cedula"], $_POST["nombre"],  $_POST["email"], $_POST["usuario"], $_POST["password"]);
+        }
+    }
 }
