@@ -20,7 +20,7 @@
                 <td><?php if (isset($usuario->email)) echo htmlspecialchars($usuario->email, ENT_QUOTES, 'UTF-8'); ?></td>
                 <td><?php if (isset($usuario->usuario)) echo htmlspecialchars($usuario->usuario, ENT_QUOTES, 'UTF-8'); ?></td>
                 <td><?php if (isset($usuario->password)) echo htmlspecialchars($usuario->password, ENT_QUOTES, 'UTF-8'); ?></td>
-                <td><a href="<?php echo URL . 'songs/deletesong/' . htmlspecialchars($usuario->idusuario, ENT_QUOTES, 'UTF-8'); ?>">Eliminar</a></td>
+                <td><a href="<?php echo URL . 'usuarios/eliminarUsuario/' . htmlspecialchars($usuario->idusuario, ENT_QUOTES, 'UTF-8'); ?>">Eliminar</a></td>
             </tr>
         <?php } ?>
         </tbody>

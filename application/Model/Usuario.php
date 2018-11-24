@@ -25,7 +25,7 @@ class Usuario extends Model
         $parameters = array(':cedula' => $cedula, ':nombre' => $nombre, ':email' => $email, ':usuario' => $usuario, ':password' => md5($password), ':fk_rol_idrol' => 2);
         $query->execute($parameters);
     }
-
+    
     /**
      * Listar usuario
      * @param string $usuario   Usuario
@@ -47,5 +47,20 @@ class Usuario extends Model
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
+    }
+
+    /**
+     * Eliminar un usuario
+     * @param int $idUsuario ID del usuario
+     */
+    public function eliminarUsuario($idUsuario){
+        $sql = "DELETE FROM usuario WHERE idusuario = :idUsuario";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':idUsuario' => $idUsuario);
+
+        // useful for debugging: you can see the SQL behind above construction by using:
+        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
+
+        $query->execute($parameters);
     }
 }

@@ -45,7 +45,7 @@ class UsuariosController
             }else{
                 $_SESSION["rol"]=$usuario->fk_rol_idrol;
                 $_SESSION["login"]=true;
-                header('location: ' . URL);
+                header('location: ' . URL . 'home/bienvenida');
             }
         }
         require APP . 'view/_templates/header.php';
@@ -73,7 +73,7 @@ class UsuariosController
 
     /**
      * ACCIÓN: Listar usuarios
-     * Este método se ejecuta en la siguiente ruta http://mis-recetas/usuarios/listar
+     * Este método se ejecuta en la siguiente ruta http://mis-recetas/usuarios/listarUsuarios
      */
     public function listarUsuarios(){
 
@@ -83,5 +83,18 @@ class UsuariosController
         require APP . 'view/_templates/header.php';
         require APP . 'view/usuarios/listar.php';
         require APP . 'view/_templates/footer.php';
+    }
+
+    /**
+     * ACCIÓN: Eliminar un usuario
+     * Este método se ejecuta en la siguiente ruta http://mis-recetas/usuarios/eliminarUsuario
+     */
+    public function eliminarUsuario($idUsuario){
+        if(isset($idUsuario)){
+            $Usuario = new Usuario();
+            $Usuario->eliminarUsuario($idUsuario);
+        }
+
+        header('location: ' . URL . 'usuarios/listarUsuarios');
     }
 }

@@ -1,3 +1,3 @@
 <div class="container">
-    <h1>Bienvenido!</h1>
+    <h1>Inicia sesión o registrate!</h1>
 </div>
