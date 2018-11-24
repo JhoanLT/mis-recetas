@@ -106,18 +106,48 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active border-right">
+      <!--<li class="nav-item active border-right">
         <a class="nav-link" href="<?php echo URL; ?>">Inicio<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active border-right">
-        <a class="nav-link" href="<?php echo URL; ?>usuarios">Registrar usuarios</a>
-      </li>
-      <li class="nav-item active border-right">
+      </li>-->
+
+      <?php if(isset($_SESSION['login']) == false){ ?>
+        <li class="nav-item active border-right">
+            <a class="nav-link" href="<?php echo URL; ?>usuarios/login">Iniciar sesión</a>
+        </li>
+        <li class="nav-item active border-right">
+            <a class="nav-link" href="<?php echo URL; ?>usuarios">Registrarme</a>
+        </li>
+      <?php } ?>
+
+      <?php if(isset($_SESSION['login'])) { ?>
+        <li class="nav-item active border-right">
+            <a class="nav-link" href="<?php echo URL; ?>usuarios/login">Cerrar sesión</a>
+        </li>
+      <?php }?>
+
+      <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {?>      
+        <li class="nav-item active border-right">
+            <a class="nav-link" href="<?php echo URL; ?>usuarios/listarUsuarios">Gestionar usuarios</a>
+        </li>
+        <li class="nav-item active border-right">
+            <a class="nav-link" href="#">Clasificación de recetas</a>
+        </li>
+        <li class="nav-item active border-right">
+            <a class="nav-link" href="#">Ingredientes</a>
+        </li>
+      <?php } ?>
+
+      <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 2) {?>      
+        <li class="nav-item active border-right">
+            <a class="nav-link" href="#">Recetas</a>
+        </li>
+      <?php } ?>
+      <!--<li class="nav-item active border-right">
         <a class="nav-link" href="<?php echo URL; ?>home/exampletwo">Página</a>
       </li>
       <li class="nav-item active border-right">
         <a class="nav-link" href="<?php echo URL; ?>songs">Songs</a>
-      </li>
+      </li>-->
     </ul>
   </div>
 </nav>

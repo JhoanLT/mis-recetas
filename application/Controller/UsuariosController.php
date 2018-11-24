@@ -20,14 +20,41 @@ class UsuariosController
 {
     public function index()
     {
+        unset($_SESSION["rol"]);
        // load views. within the views we can echo out $songs and $amount_of_songs easily
         require APP . 'view/_templates/header.php';
         require APP . 'view/usuarios/index.php';
         require APP . 'view/_templates/footer.php';
     }
+
+    /**
+     * ACCIÓN: Inicio de sesión del usuario
+     * Este método se ejecuta en la siguiente ruta http://mis-recetas/usuarios/login
+     */
+    public function login(){
+
+        unset($_SESSION["rol"]);
+        unset($_SESSION["login"]);
+
+        if(isset($_POST["btnLogin"])){
+            $Usuario = new Usuario();
+            $usuario = $Usuario->obtenerUsuario($_POST["usuario"], md5($_POST["password"]));
+
+            if($usuario == false){
+
+            }else{
+                $_SESSION["rol"]=$usuario->fk_rol_idrol;
+                $_SESSION["login"]=true;
+                header('location: ' . URL);
+            }
+        }
+        require APP . 'view/_templates/header.php';
+        require APP . 'view/usuarios/login.php';
+        require APP . 'view/_templates/footer.php';
+    }
     
     /**
-     * ACCIÓN: agregarUsuario
+     * ACCIÓN: Agregar un nuevo usuario
      * Este método se ejecuta en la siguiente ruta http://mis-recetas/usuarios/agregarUsuario
      */
     public function agregarUsuario()
@@ -35,9 +62,26 @@ class UsuariosController
         // Si llegan datos por POST para crear un nuevo usuario
         if (isset($_POST["btnAgregarUsuario"])) {
             //Instancia el modelo de Usuario
-            $Song = new Usuario();
+            $Usuario = new Usuario();
             // Se ejecuta el metodo que agrega un nuevo usuario
-            $Song->agregarUsuario($_POST["cedula"], $_POST["nombre"],  $_POST["email"], $_POST["usuario"], $_POST["password"]);
+            $Usuario->agregarUsuario($_POST["cedula"], $_POST["nombre"],  $_POST["email"], $_POST["usuario"], $_POST["password"]);
         }
+
+        // where to go after song has been added
+        header('location: ' . URL . 'usuarios/login');
+    }
+
+    /**
+     * ACCIÓN: Listar usuarios
+     * Este método se ejecuta en la siguiente ruta http://mis-recetas/usuarios/listar
+     */
+    public function listarUsuarios(){
+
+        $Usuario = new Usuario();
+        $usuarios = $Usuario->listarUsuarios();
+
+        require APP . 'view/_templates/header.php';
+        require APP . 'view/usuarios/listar.php';
+        require APP . 'view/_templates/footer.php';
     }
 }

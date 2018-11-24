@@ -20,9 +20,32 @@ class Usuario extends Model
      */
     public function agregarUsuario($cedula, $nombre, $email, $usuario, $password)
     {
-        $sql = "INSERT INTO usuario (cedula, nombre, email, usuario, password) VALUES (:cedula, :nombre, :email, :usuario, :password)";
+        $sql = "INSERT INTO usuario (cedula, nombre, email, usuario, password, fk_rol_idrol) VALUES (:cedula, :nombre, :email, :usuario, :password, :fk_rol_idrol)";
         $query = $this->db->prepare($sql);
-        $parameters = array(':cedula' => $cedula, ':nombre' => $nombre, ':email' => $email, ':usuario' => $usuario, ':password' => $password);
+        $parameters = array(':cedula' => $cedula, ':nombre' => $nombre, ':email' => $email, ':usuario' => $usuario, ':password' => md5($password), ':fk_rol_idrol' => 2);
         $query->execute($parameters);
+    }
+
+    /**
+     * Listar usuario
+     * @param string $usuario   Usuario
+     * @param string $password  Contraseña
+     */
+    public function obtenerUsuario($usuario, $password){
+        $sql = "SELECT * FROM usuario WHERE usuario = :usuario AND password = :password LIMIT 1";
+        $query = $this->db->prepare($sql);
+        $parameters = array(':usuario' => $usuario, ':password' => $password);
+        $query->execute($parameters);
+        return ($query->rowcount() ? $query->fetch() : false);
+    }
+
+    /**
+     * Listar todos los usuarios
+     */
+    public function listarUsuarios(){
+        $sql = "SELECT * FROM usuario";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
     }
 }

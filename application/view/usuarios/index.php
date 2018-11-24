@@ -18,20 +18,20 @@
                     <input type="text" name="usuario" class="form-control" placeholder="Usuario *" value="" />
                 </div>
                 <div class="form-group">
-                    <input type="text" name="password" class="form-control" placeholder="Contraseña *" value="" />
+                    <input type="password" name="password" class="form-control" placeholder="Contraseña *" value="" />
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <input type="submit" name="btnAgregarUsuario" class="btnContact" value="Registrar" />
+                    <input type="submit" name="btnAgregarUsuario" class="btnContact" value="Registrarme" />
                 </div>
             </div>
         </div>
     </form>
 </div>
-<table id="example" class="display" style="width:100%">
+<!--<table id="example" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>Name</th>
@@ -126,4 +126,4 @@
                 <th>Salary</th>
             </tr>
         </tfoot>
-    </table>
+    </table>-->
