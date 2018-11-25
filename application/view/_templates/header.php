@@ -119,21 +119,15 @@
         </li>
       <?php } ?>
 
-      <?php if(isset($_SESSION['login'])) { ?>
-        <li class="nav-item active border-right">
-            <a class="nav-link" href="<?php echo URL; ?>usuarios/login">Cerrar sesión</a>
-        </li>
-      <?php }?>
-
       <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 1) {?>      
         <li class="nav-item active border-right">
+            <a class="nav-link" href="<?php echo URL; ?>clasificaciones">Clasificación de recetas</a>
+        </li>
+        <li class="nav-item active border-right">
+            <a class="nav-link" href="<?php echo URL; ?>ingredientes">Ingredientes</a>
+        </li>
+        <li class="nav-item active border-right">
             <a class="nav-link" href="<?php echo URL; ?>usuarios/listarUsuarios">Gestionar usuarios</a>
-        </li>
-        <li class="nav-item active border-right">
-            <a class="nav-link" href="#">Clasificación de recetas</a>
-        </li>
-        <li class="nav-item active border-right">
-            <a class="nav-link" href="#">Ingredientes</a>
         </li>
       <?php } ?>
 
@@ -142,6 +136,13 @@
             <a class="nav-link" href="#">Recetas</a>
         </li>
       <?php } ?>
+
+      <?php if(isset($_SESSION['login'])) { ?>
+        <li class="nav-item active border-right">
+            <a class="nav-link" href="<?php echo URL; ?>usuarios/login">Cerrar sesión</a>
+        </li>
+      <?php }?>
+
       <!--<li class="nav-item active border-right">
         <a class="nav-link" href="<?php echo URL; ?>home/exampletwo">Página</a>
       </li>
