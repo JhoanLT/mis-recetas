@@ -1,5 +1,5 @@
 <div class="container contact-form">
-    <table>
+    <table id="dataTable"> 
         <thead style="background-color: #ddd; font-weight: bold;">
         <tr>
             <td>Id Usuario</td>

@@ -30,3 +30,27 @@
         </form>
     </div>
 </div>
+<div class="container contact-form">
+    <table id="dataTable">
+        <thead style="background-color: #ddd; font-weight: bold;">
+        <tr>
+            <td>Id Ingrediente</td>
+            <td>Nombre</td>
+            <td>Descripción</td>
+            <td>Clasificación</td>
+            <td>Opción</td>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($ingredientes as $ingrediente) { ?>
+            <tr>
+                <td><?php if (isset($ingrediente->idingrediente)) echo htmlspecialchars($ingrediente->idingrediente, ENT_QUOTES, 'UTF-8'); ?></td>
+                <td><?php if (isset($ingrediente->nombre)) echo htmlspecialchars($ingrediente->nombre, ENT_QUOTES, 'UTF-8'); ?></td>
+                <td><?php if (isset($ingrediente->descripcion)) echo htmlspecialchars($ingrediente->descripcion, ENT_QUOTES, 'UTF-8'); ?></td>
+                <td><?php if (isset($ingrediente->clasificacion)) echo htmlspecialchars($ingrediente->clasificacion, ENT_QUOTES, 'UTF-8'); ?></td>
+                <td><a href="<?php echo URL . 'ingredientes/editarIngrediente/' . htmlspecialchars($ingrediente->idingrediente, ENT_QUOTES, 'UTF-8'); ?>">Modificar</a></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+</div>

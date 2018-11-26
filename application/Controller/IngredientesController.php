@@ -24,6 +24,9 @@ class IngredientesController
         $Clasificacion = new Clasificacion();
         $clasificaciones = $Clasificacion->listarClasificaciones();
 
+        $Ingrediente = new Ingrediente();
+        $ingredientes = $Ingrediente->listarIngredientes();
+
        // load views. within the views we can echo out $songs and $amount_of_songs easily
         require APP . 'view/_templates/header.php';
         require APP . 'view/ingredientes/index.php';
@@ -60,5 +63,39 @@ class IngredientesController
 
         // where to go after song has been added
         header('location: ' . URL . 'ingredientes');
+    }
+
+        /**
+     * ACCIÓN: Actualizar ingrediente
+     * Este método se ejecuta en la siguiente ruta http://mis-recetas/ingredientes/editarIngrediente
+     */
+    public function editarIngrediente($idingrediente){
+        
+        // if we have an id of a song that should be edited
+        if (isset($idingrediente)) {
+            
+            $Clasificacion = new Clasificacion();
+            $clasificaciones = $Clasificacion->listarClasificaciones();
+
+            // Instance new Model (Song)
+            $Ingrediente = new Ingrediente();
+
+            // do getSong() in model/model.php
+            $ingrediente = $Ingrediente->obtenerIngrediente($idingrediente);
+
+            // If the song wasn't found, then it would have returned false, and we need to display the error page
+            if ($ingrediente === false) {
+                $page = new \Mini\Controller\ErrorController();
+                $page->index();
+            } else {
+                // load views. within the views we can echo out $song easily
+                require APP . 'view/_templates/header.php';
+                require APP . 'view/ingredientes/editar.php';
+                require APP . 'view/_templates/footer.php';
+            }
+        } else {
+            // redirect user to songs index page (as we don't have a song_id)
+            header('location: ' . URL . 'ingredientes');
+        }
     }
 }

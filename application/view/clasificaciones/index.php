@@ -1,9 +1,9 @@
 <div class="container contact-form" style="width:40%;">
     <div> 
-        <form id="loginMember" role="form" action="<?php echo URL; ?>clasificaciones/agregarClasificacion" method="post">
+        <form id="loginMember" role="form" action="<?php echo URL; ?>clasificaciones/agregarClasificacion" method="post" data-parsley-validate>
             <h3>Agregar clasificación</h3>
             <div class="form-group">
-                <input type="text" class="form-control" id="idNombre" placeholder="Nombre" name="nombre">
+                <input type="text" class="form-control" id="idNombre" placeholder="Nombre" name="nombre" data-parsley-required>
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" id="idDescripcion" placeholder="Descripción" name="descripcion">
@@ -20,7 +20,7 @@
 </div>
 
 <div class="container contact-form">
-    <table>
+    <table id="dataTable">
         <thead style="background-color: #ddd; font-weight: bold;">
         <tr>
             <td>Id Clasificación</td>
@@ -41,5 +41,3 @@
         </tbody>
     </table>
 </div>
-<h1>Jhoan</h1>
-<img src="public/img/218758.jpg" alt="No se ha mostrado la imágen">

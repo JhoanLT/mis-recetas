@@ -49,7 +49,7 @@ class ClasificacionesController
     }
 
     /**
-     * ACCIÓN: Actualizar clasificación
+     * ACCIÓN: Editar la clasificación
      * Este método se ejecuta en la siguiente ruta http://mis-recetas/clasificaciones/editarClasificacion
      */
     public function editarClasificacion($idclasificacion){
