@@ -22,6 +22,9 @@
             <div class="form-group">
                 <input type="hidden" name="idingrediente" value="<?php echo htmlspecialchars($ingrediente->idingrediente, ENT_QUOTES, 'UTF-8'); ?>" />
             </div>
+            <div class="form-group">
+                <input type="hidden" name="imagenAnterior" value="<?php echo htmlspecialchars($ingrediente->imagen, ENT_QUOTES, 'UTF-8'); ?>" />
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">

@@ -53,12 +53,12 @@ class IngredientesController
                 }
             }
 
-            $rutaImagen = 'public/img/'.$nombreImagen;
+            //$rutaImagen = 'public/img/'.$nombreImagen;
 
             //Instancia el modelo de Ingrediente
             $Ingrediente = new Ingrediente();
             // Se ejecuta el metodo que agrega un nuevo ingrediente
-            $Ingrediente->agregarIngrediente($_POST["nombre"],  $_POST["descripcion"], $rutaImagen, $_POST['clasificacion']);
+            $Ingrediente->agregarIngrediente($_POST["nombre"],  $_POST["descripcion"], $urlNueva, $_POST['clasificacion']);
         }
 
         // where to go after song has been added
@@ -97,5 +97,34 @@ class IngredientesController
             // redirect user to songs index page (as we don't have a song_id)
             header('location: ' . URL . 'ingredientes');
         }
+    }
+
+    public function actualizarIngrediente(){
+        if(isset($_POST['btnActualizarIngrediente'])){
+            $rutaImagen = '';
+            if($_FILES['imagen']['name'] == ''){
+                $rutaImagen = $_POST['imagenAnterior'];
+            } else {
+                $nombreImagen = $_FILES['imagen']['name'];
+                $tmpImagen = $_FILES['imagen']['tmp_name'];
+                $extImagen = pathinfo($nombreImagen);
+                $ext = ["png", "gif", "jpg", "jpeg"];
+                $urlNueva = "../public/img/".$nombreImagen;
+    
+                if(is_uploaded_file($tmpImagen)){
+                    if(array_search($extImagen['extension'], $ext)){
+                        copy($_FILES['imagen']['tmp_name'], $urlNueva);
+                    }
+                }
+    
+                //$rutaImagen = 'public/img/'.$nombreImagen;
+            }
+
+            $Ingrediente = new Ingrediente();
+            
+            $Ingrediente->actualizarIngrediente($_POST['idingrediente'], $_POST['nombre'], $_POST['descripcion'], $urlNueva, $_POST['clasificacion']);
+        }
+
+        header('location: ' . URL . 'ingredientes');
     }
 }

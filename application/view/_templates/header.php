@@ -133,7 +133,7 @@
 
       <?php if(isset($_SESSION['rol']) && $_SESSION['rol'] == 2) {?>      
         <li class="nav-item active border-right">
-            <a class="nav-link" href="#">Recetas</a>
+            <a class="nav-link" href="<?php echo URL; ?>recetas">Recetas</a>
         </li>
       <?php } ?>
 

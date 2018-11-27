@@ -52,7 +52,7 @@ class Clasificacion extends Model
      * automatically. We also don't use strip_tags() etc. here so we keep the input 100% original (so it's possible
      * to save HTML and JS to the database, which is a valid use case). Data will only be cleaned when putting it out
      * in the views (see the views for more info).
-     * @param int    $idclasificacion  Id de la clasifiación
+     * @param int    $idclasificacion  Id de la clasificación
      * @param string $nombre           Nombre
      * @param string $descripcion      Descripción
      */
