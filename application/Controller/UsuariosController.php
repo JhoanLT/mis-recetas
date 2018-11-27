@@ -35,6 +35,7 @@ class UsuariosController
 
         unset($_SESSION["rol"]);
         unset($_SESSION["login"]);
+        unset($_SESSION["usuario"]);
 
         if(isset($_POST["btnLogin"])){
             $Usuario = new Usuario();
@@ -45,6 +46,7 @@ class UsuariosController
             }else{
                 $_SESSION["rol"]=$usuario->fk_rol_idrol;
                 $_SESSION["login"]=true;
+                $_SESSION["usuario"]=$usuario->idusuario;
                 header('location: ' . URL . 'home/bienvenida');
             }
         }
