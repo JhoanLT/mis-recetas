@@ -1,15 +1,7 @@
 <?php
 
 /**
- * Class SongsController
- * This is a demo Controller class.
- *
- * If you want, you can use multiple Models or Controllers.
- *
- * Please note:
- * Don't use the same name for class and method, as this might trigger an (unintended) __construct of the class.
- * This is really weird behaviour, but documented here: http://php.net/manual/en/language.oop5.decon.php
- *
+ * Class IngredientesController
  */
 
 namespace Mini\Controller;
@@ -19,6 +11,9 @@ use Mini\Model\Clasificacion;
 
 class IngredientesController
 {
+    /**
+     * Método que se ejecuta inicialmente al ingresar al módulo de Ingredientes : http://localhost/mis-recetas/ingredientes
+     */
     public function index()
     {
         $Clasificacion = new Clasificacion();
@@ -41,14 +36,20 @@ class IngredientesController
     {
         // Si llegan datos por POST para crear un nuevo ingrediente
         if (isset($_POST["btnRegistarIngrediente"])) {
-            $nombreImagen = $_FILES['imagen']['name'];
-            $tmpImagen = $_FILES['imagen']['tmp_name'];
-            $extImagen = pathinfo($nombreImagen);
-            $ext = ["png", "gif", "jpg", "jpeg"];
-            $urlNueva = "../public/img/".$nombreImagen;
 
+            //En esta parte se trabaja todo lo relacionado a la carga de la imágen
+            //Ruta de almacenamiento, extensiones
+            $nombreImagen = $_FILES['imagen']['name']; // Se extrae el nombre de la imágen
+            $tmpImagen = $_FILES['imagen']['tmp_name'];
+            $extImagen = pathinfo($nombreImagen); // Se extrae la extensión de la imágen subida
+            $ext = ["png", "gif", "jpg", "jpeg"]; //Array para validar las extensiones
+            $urlNueva = "../public/img/".$nombreImagen; // Se general la URL donde se va a guardar la imágen
+
+            //Si hay una imágen cargada
             if(is_uploaded_file($tmpImagen)){
+                //Se valida la extensión
                 if(array_search($extImagen['extension'], $ext)){
+                    //Estando todo correcto se guarda en la ruta especificada
                     copy($_FILES['imagen']['tmp_name'], $urlNueva);
                 }
             }
@@ -61,50 +62,57 @@ class IngredientesController
             $Ingrediente->agregarIngrediente($_POST["nombre"],  $_POST["descripcion"], $urlNueva, $_POST['clasificacion']);
         }
 
-        // where to go after song has been added
+        // Se retorna al inicio del módulo de Ingredientes : http://localhost/mis-recetas/ingredientes
         header('location: ' . URL . 'ingredientes');
     }
 
-        /**
+    /**
      * ACCIÓN: Actualizar ingrediente
      * Este método se ejecuta en la siguiente ruta http://mis-recetas/ingredientes/editarIngrediente
      */
     public function editarIngrediente($idingrediente){
         
-        // if we have an id of a song that should be edited
+        // Se valida si se encuentra un ingrediente por editard
         if (isset($idingrediente)) {
             
             $Clasificacion = new Clasificacion();
             $clasificaciones = $Clasificacion->listarClasificaciones();
 
-            // Instance new Model (Song)
+            //Intancia del modelo de Ingrediente
             $Ingrediente = new Ingrediente();
 
-            // do getSong() in model/model.php
+            // Se obtiene el ingrediente a modificar
             $ingrediente = $Ingrediente->obtenerIngrediente($idingrediente);
 
-            // If the song wasn't found, then it would have returned false, and we need to display the error page
+            // Si no se encontró el ingrediente, entonces habría devuelto falso, y necesitamos mostrar la página de error
             if ($ingrediente === false) {
                 $page = new \Mini\Controller\ErrorController();
                 $page->index();
             } else {
-                // load views. within the views we can echo out $song easily
+                // Se cargan las vistas para editar un ingrediente : http://localhost/mis-recetas/ingredientes/editarIngrediente/ID
                 require APP . 'view/_templates/header.php';
                 require APP . 'view/ingredientes/editar.php';
                 require APP . 'view/_templates/footer.php';
             }
         } else {
-            // redirect user to songs index page (as we don't have a song_id)
+            // Se retorna al inicio del módulo de ingredientes: http://localhost/mis-recetas/ingredientes
             header('location: ' . URL . 'ingredientes');
         }
     }
 
+    /**
+     * Actualizar un ingrediente
+     */
     public function actualizarIngrediente(){
+
+        //Si existen datos por POST
         if(isset($_POST['btnActualizarIngrediente'])){
-            $rutaImagen = '';
+            $urlNueva = '';
+            //Si el usuario no cargo una nueva imágen, se le deja la que tenia
             if($_FILES['imagen']['name'] == ''){
-                $rutaImagen = $_POST['imagenAnterior'];
+                $urlNueva = $_POST['imagenAnterior'];
             } else {
+                //Si el usuario a cargado una imágen nueva, se realiza otra vez proceso
                 $nombreImagen = $_FILES['imagen']['name'];
                 $tmpImagen = $_FILES['imagen']['tmp_name'];
                 $extImagen = pathinfo($nombreImagen);
@@ -119,12 +127,14 @@ class IngredientesController
     
                 //$rutaImagen = 'public/img/'.$nombreImagen;
             }
-
+               
+            //Instancia del modelo de Ingrediente
             $Ingrediente = new Ingrediente();
-            
+            //Se ejecuta el método encargado de realizar la actualización del ingrediente
             $Ingrediente->actualizarIngrediente($_POST['idingrediente'], $_POST['nombre'], $_POST['descripcion'], $urlNueva, $_POST['clasificacion']);
         }
 
+        //Se redirecciona al inicio del módulo de ingredientes  :http://localhost/mis-recetas/ingredientes/
         header('location: ' . URL . 'ingredientes');
     }
 }

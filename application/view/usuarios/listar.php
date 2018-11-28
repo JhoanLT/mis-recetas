@@ -1,3 +1,4 @@
+<!-- TABLA DE LISTADO DE USUARIOS -->
 <div class="container contact-form">
     <table id="dataTable"> 
         <thead style="background-color: #ddd; font-weight: bold;">

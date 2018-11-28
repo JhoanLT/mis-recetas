@@ -1,3 +1,4 @@
+<!-- LISTADO DE INGREDIENTES PARA AGREGAR A UNA RECETA -->
 <div class="container contact-form" style="width:100%;">
     <h4 style="margin-bottom: 20px;">Añade los ingredientes para la receta: <?php echo $receta->nombre ?></h4>
     <div class="card-columns">
@@ -16,13 +17,13 @@
     <div class="row">
         <div class="col-md-12">
             <div class="form-group" style="text-align: center; margin-top: 20px;">
-                <button class="btnContact" name="btnTerminarIngredientes" onclick="regresar();">Terminar</button>
+                <button class="btnEnviar" name="btnTerminarIngredientes" onclick="regresar();">Terminar</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal para agregar la cantidad del ingrediente que se va a agregar a la receta -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -47,15 +48,17 @@
 
 <script>
 
+    //Función que abre el modal para agregar la cantidad
     function abrirModal(idreceta, idingrediente){
-        $("#idcantidad").val("");
+        $("#idcantidad").val("1");
         $("#idreceta").val(idreceta);
         $("#idingrediente").val(idingrediente);
         $("#exampleModal").modal("show");
     }
 
+    //Función encargada de enviar al servidor los datos del ingrediente seleccionado junto con la cantidad
+    //para realizar el registro
     function registrarIngrediente(){
-    
         let cantidad = $("#idcantidad").val();
         let idingrediente = $("#idingrediente").val();
         let idreceta = $("#idreceta").val();
@@ -77,6 +80,7 @@
         });
     }
 
+    //Función que retorna al módulo de recetas
     function regresar(){
         location.href = url + 'recetas';
     }

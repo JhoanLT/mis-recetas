@@ -32,6 +32,10 @@ class Receta extends Model
         return $query->fetch();
     }
 
+    /**
+     * Realizar el registro en la tabla detalle de la receta y el ingrediente, se asocia el ingrediente que selecciono
+     * el usuario a la receta junto con la cantidad que agrego.
+     */
     public function registrarDetalleRecetaIngrediente($idreceta, $idingrediente, $cantidad){
         $sql = "INSERT INTO detalle_receta_ingrediente (id_receta, id_ingrediente, cantidad) VALUES (:idreceta, :idingrediente, :cantidad)";
         $query = $this->db->prepare($sql);

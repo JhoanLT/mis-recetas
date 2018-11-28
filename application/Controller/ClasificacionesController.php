@@ -1,15 +1,7 @@
 <?php
 
 /**
- * Class SongsController
- * This is a demo Controller class.
- *
- * If you want, you can use multiple Models or Controllers.
- *
- * Please note:
- * Don't use the same name for class and method, as this might trigger an (unintended) __construct of the class.
- * This is really weird behaviour, but documented here: http://php.net/manual/en/language.oop5.decon.php
- *
+ * Class ClasificacionesController
  */
 
 namespace Mini\Controller;
@@ -18,6 +10,9 @@ use Mini\Model\Clasificacion;
 
 class ClasificacionesController
 {
+    /**
+     * Método que se carga inicialmente al ingresar a la ruta de http://localhost/mis-recetas/clasificaciones
+     */
     public function index()
     {
         $Clasificacion = new Clasificacion();
@@ -44,7 +39,7 @@ class ClasificacionesController
             $Clasificacion->agregarClasificacion($_POST["nombre"],  $_POST["descripcion"]);
         }
 
-        // where to go after song has been added
+        // Al finalizar la petición se redirecciona al inicio de las clasificiones : http://localhost/mis-recetas/clasificaciones
         header('location: ' . URL . 'clasificaciones');
     }
 
@@ -54,48 +49,42 @@ class ClasificacionesController
      */
     public function editarClasificacion($idclasificacion){
         
-        // if we have an id of a song that should be edited
+        // Se valida si se encuentra un clasificación por editar
         if (isset($idclasificacion)) {
-            // Instance new Model (Song)
+            // Instancia del modelo de Clasificación
             $Clasificacion = new Clasificacion();
-            // do getSong() in model/model.php
+            //Se obtiene la clasificación a editar
             $clasificacion = $Clasificacion->obtenerClasificacion($idclasificacion);
 
-            // If the song wasn't found, then it would have returned false, and we need to display the error page
+            // Si no se encontró la clasificación, entonces habría devuelto falso, y necesitamos mostrar la página de error
             if ($clasificacion === false) {
                 $page = new \Mini\Controller\ErrorController();
                 $page->index();
             } else {
-                // load views. within the views we can echo out $song easily
+                // Se cargan las vistas para editar la clasificación
                 require APP . 'view/_templates/header.php';
                 require APP . 'view/clasificaciones/editar.php';
                 require APP . 'view/_templates/footer.php';
             }
         } else {
-            // redirect user to songs index page (as we don't have a song_id)
+            // Al finalizar la petición se redirecciona al inicio de las clasificiones : http://localhost/mis-recetas/clasificaciones
             header('location: ' . URL . 'clasificaciones');
         }
     }
 
     /**
      * ACTION: Actualizar una clasificación
-     * This method handles what happens when you move to http://yourproject/songs/updatesong
-     * IMPORTANT: This is not a normal page, it's an ACTION. This is where the "update a song" form on songs/edit
-     * directs the user after the form submit. This method handles all the POST data from the form and then redirects
-     * the user back to songs/index via the last line: header(...)
-     * This is an example of how to handle a POST request.
      */
     public function actualizarClasificacion()
     {
-        // if we have POST data to create a new song entry
+        // Se pregunta si tenemos datos POST para actualizar una clasificación
         if (isset($_POST["btnActualizarClasificacion"])) {
-            // Instance new Model (Song)
+            // Instancia del modelo Clasificación
             $Clasificacion = new Clasificacion();
-            // do updateSong() from model/model.php
+            // Se ejecuta el método encargado de realizar la actualización en base de datos
             $Clasificacion->actualizarClasificacion($_POST["idclasificacion"], $_POST["nombre"],  $_POST["descripcion"]);
         }
-
-        // where to go after song has been added
+        // Al finalizar la petición se redirecciona al inicio de las clasificiones : http://localhost/mis-recetas/clasificaciones
         header('location: ' . URL . 'clasificaciones');
     }
 }

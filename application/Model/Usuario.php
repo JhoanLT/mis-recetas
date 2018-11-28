@@ -27,7 +27,7 @@ class Usuario extends Model
     }
     
     /**
-     * Listar usuario
+     * Listar usuario por ID
      * @param string $usuario   Usuario
      * @param string $password  Contraseña
      */
@@ -57,9 +57,6 @@ class Usuario extends Model
         $sql = "DELETE FROM usuario WHERE idusuario = :idUsuario";
         $query = $this->db->prepare($sql);
         $parameters = array(':idUsuario' => $idUsuario);
-
-        // useful for debugging: you can see the SQL behind above construction by using:
-        // echo '[ PDO DEBUG ]: ' . Helper::debugPDO($sql, $parameters);  exit();
 
         $query->execute($parameters);
     }

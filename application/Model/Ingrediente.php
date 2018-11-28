@@ -43,7 +43,7 @@ class Ingrediente extends Model
     }
 
     /**
-     * Listar ingrediente
+     * Listar ingrediente por ID
      * @param string $idingrediente   ID del Ingrediente
      */
     public function obtenerIngrediente($idingrediente){
@@ -56,11 +56,6 @@ class Ingrediente extends Model
 
     /**
      * Actualizar ingrediente en base de datos
-     * // TODO put this explaination into readme and remove it from here
-     * Please note that it's not necessary to "clean" our input in any way. With PDO all input is escaped properly
-     * automatically. We also don't use strip_tags() etc. here so we keep the input 100% original (so it's possible
-     * to save HTML and JS to the database, which is a valid use case). Data will only be cleaned when putting it out
-     * in the views (see the views for more info).
      * @param int    $idingrediente    Id del ingrediente
      * @param string $nombre           Nombre
      * @param string $descripcion      Descripción

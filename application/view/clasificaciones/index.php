@@ -1,17 +1,33 @@
-<div class="container contact-form" style="width:40%;">
+<!-- FORMULARIO DE REGISTRO DE RECETAS PARA EL USUARIO ADMINISTRADOR -->
+<div class="container user-form" style="width:40%;">
     <div> 
         <form id="loginMember" role="form" action="<?php echo URL; ?>clasificaciones/agregarClasificacion" method="post" data-parsley-validate>
             <h3>Agregar clasificación</h3>
             <div class="form-group">
-                <input type="text" class="form-control" id="idNombre" placeholder="Nombre" name="nombre" data-parsley-required>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="idNombre" 
+                    placeholder="Nombre" 
+                    name="nombre" 
+                    required 
+                    data-parsley-pattern="^[a-zA-Z]+$"
+                    data-parsley-trigger="keyup"
+                >
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="idDescripcion" placeholder="Descripción" name="descripcion">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="idDescripcion" 
+                    placeholder="Descripción" 
+                    name="descripcion"
+                >
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <input type="submit" name="btnClasificacion" class="btnContact" value="Registrar" />
+                        <button name="btnClasificacion" class="btnEnviar">Registrar</button>
                     </div>
                 </div>
             </div>
@@ -19,6 +35,7 @@
     </div>
 </div>
 
+<!-- Se construye la tabla para listar las clasificaciones -->
 <div class="container contact-form">
     <table id="dataTable">
         <thead style="background-color: #ddd; font-weight: bold;">
@@ -41,3 +58,20 @@
         </tbody>
     </table>
 </div>
+
+<script>
+
+    $(document).ready(() => {
+        $('#loginMember').parsley();
+    });
+    
+    //Alerta de guardado exitoso!
+    function alertaConfirmación(){
+        swal({
+            text: "Guardado exitoso!",
+            icon: "success",
+            button: "Continuar",
+        });
+    }
+
+</script>
