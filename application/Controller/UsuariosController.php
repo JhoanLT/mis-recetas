@@ -1,15 +1,7 @@
 <?php
 
 /**
- * Class SongsController
- * This is a demo Controller class.
- *
- * If you want, you can use multiple Models or Controllers.
- *
- * Please note:
- * Don't use the same name for class and method, as this might trigger an (unintended) __construct of the class.
- * This is really weird behaviour, but documented here: http://php.net/manual/en/language.oop5.decon.php
- *
+ * Class UsuariosController
  */
 
 namespace Mini\Controller;
@@ -18,10 +10,15 @@ use Mini\Model\Usuario;
 
 class UsuariosController
 {
+    /**
+     * Método que se encarga de cargar la vista para el registro de usuarios  :http://localhost/mis-recetas/usuarios
+     */
     public function index()
     {
+        //Se limpia la variable que almacena el rol del usuario (Administrador - Usuario)
         unset($_SESSION["rol"]);
-       // load views. within the views we can echo out $songs and $amount_of_songs easily
+
+       // Carga de las vistas
         require APP . 'view/_templates/header.php';
         require APP . 'view/usuarios/index.php';
         require APP . 'view/_templates/footer.php';
@@ -33,23 +30,31 @@ class UsuariosController
      */
     public function login(){
 
+        //Se limpian las variables de session
         unset($_SESSION["rol"]);
         unset($_SESSION["login"]);
         unset($_SESSION["usuario"]);
 
+        //Se pregunta si existen datos por POST
         if(isset($_POST["btnLogin"])){
             $Usuario = new Usuario();
+
+            //Se consulta por usuario y contraseña, donde deben de conincidir ambas
             $usuario = $Usuario->obtenerUsuario($_POST["usuario"], md5($_POST["password"]));
 
             if($usuario == false){
-
+                //Si es false es que no se encontro el usuario en la base de datos
             }else{
+                //Si se encontro el usuario se crean las variables de session con los datos del usuario
+                //Estas variables se podran utilizar en toda la aplicación siempre y cuando haya una session abierta
                 $_SESSION["rol"]=$usuario->fk_rol_idrol;
                 $_SESSION["login"]=true;
                 $_SESSION["usuario"]=$usuario->idusuario;
                 header('location: ' . URL . 'home/bienvenida');
             }
         }
+
+        //Carga de las vistas del login
         require APP . 'view/_templates/header.php';
         require APP . 'view/usuarios/login.php';
         require APP . 'view/_templates/footer.php';
