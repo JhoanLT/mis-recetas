@@ -1,7 +1,7 @@
 <!-- FORMULARIO PARA EDITAR UNA CLASIFICACIÓN -->
 <div class="container user-form" style="width:40%;">
     <div> 
-        <form id="loginMember" role="form" action="<?php echo URL; ?>clasificaciones/actualizarClasificacion" method="post" data-parsley-validate>
+        <form id="formActualizarClasificacion" role="form" action="<?php echo URL; ?>clasificaciones/actualizarClasificacion" method="post" data-parsley-validate onsubmit="alertaConfirmacion();">
             <h3>Actualizar clasificación</h3>
             <div class="form-group">
                 <input 
@@ -40,3 +40,16 @@
         </form>
     </div>
 </div>
+
+<script>
+//Alerta de guardado exitoso!
+function alertaConfirmacion(){
+    if($("#formActualizarClasificacion").parsley().isValid()){
+        swal({
+            text: "Guardado exitoso!",
+            icon: "success",
+            button : false,
+        })
+    }
+}
+</script>

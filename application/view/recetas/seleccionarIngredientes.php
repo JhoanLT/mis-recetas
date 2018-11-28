@@ -77,6 +77,11 @@
         }).done((respuesta) => {
             $("#idcantidad").val("");
             $("#exampleModal").modal("hide");
+            swal({
+                text: "Ingrediente añadido!",
+                icon: "success",
+                button : "Aceptar",
+            })
         });
     }
 

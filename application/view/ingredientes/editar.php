@@ -1,7 +1,7 @@
 <!-- FORMULARIO PARA EDITAR UN INGREDIENTE -->
 <div class="container user-form" style="width:40%;">
     <div> 
-        <form id="loginMember" role="form" action="<?php echo URL; ?>ingredientes/actualizarIngrediente" method="post" enctype="multipart/form-data" data-parsley-validate>
+        <form id="formActualizarIngrediente" role="form" action="<?php echo URL; ?>ingredientes/actualizarIngrediente" method="post" enctype="multipart/form-data" data-parsley-validate onsubmit="alertaConfirmacion();">
             <h3>Actualizar ingrediente</h3>
             <div class="form-group">
                 <Label>Clasificación:</Label>
@@ -64,3 +64,16 @@
         </form>
     </div>
 </div>
+
+<script>
+    //Alerta de guardado exitoso!
+    function alertaConfirmacion(){
+        if($("#formActualizarIngrediente").parsley().isValid()){
+            swal({
+                text: "Guardado exitoso!",
+                icon: "success",
+                button : false,
+            })
+        }
+    }
+</script>

@@ -1,7 +1,7 @@
 <!-- FORMULARIO PARA AGREGAR UNA NUEVA RECETA -->
 <div class="container user-form" style="width:40%;">
     <div> 
-        <form role="form" action="<?php echo URL; ?>recetas/agregarReceta" method="post" enctype="multipart/form-data" data-parsley-validate>
+        <form id="formAgregarReceta" role="form" action="<?php echo URL; ?>recetas/agregarReceta" method="post" enctype="multipart/form-data" data-parsley-validate onsubmit="alertaConfirmacion();">
             <h3>Agregar receta</h3>
             <div class="form-group">
                 <input type="text" class="form-control" id="idNombre" placeholder="Nombre" name="nombre" required>
@@ -41,12 +41,14 @@
 </div>
 
 <script>
-    function abrirSweetalert(){
-        swal({
-            text: "Guardado exitoso!",
-            icon: "success",
-            button: "Continuar",
-        });
+    //Alerta de guardado exitoso!
+    function alertaConfirmacion(){
+        if($("#formAgregarReceta").parsley().isValid()){
+            swal({
+                text: "Guardado exitoso!",
+                icon: "success",
+                button : false,
+            })
+        }
     }
-
 </script>

@@ -1,6 +1,6 @@
 <!-- FORMULARIO DE REGISTRO DE USUARIOS -->
 <div class="container user-form">
-    <form id="registroUsuario" action="<?php echo URL; ?>usuarios/agregarUsuario" method="post" data-parsley-validate>
+    <form id="registroUsuario" action="<?php echo URL; ?>usuarios/agregarUsuario" method="post" data-parsley-validate onsubmit="alertaConfirmacion();">
         <h3>Registro de usuarios</h3>
         <div class="row">
             <div class="col-md-6">
@@ -20,8 +20,7 @@
                         name="nombre" 
                         class="form-control" 
                         placeholder="Nombre *"
-                        required 
-                        data-parsley-pattern="^[a-zA-Z]+$"
+                        required
                         data-parsley-trigger="keyup"/>
                 </div>
                 <div class="form-group">
@@ -63,3 +62,16 @@
         </div>
     </form>
 </div>
+
+<script>
+    //Alerta de guardado exitoso!
+    function alertaConfirmacion(){
+        if($("#registroUsuario").parsley().isValid()){
+            swal({
+                text: "Guardado exitoso!",
+                icon: "success",
+                button : false,
+            })
+        }
+    }
+</script>

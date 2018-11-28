@@ -1,7 +1,7 @@
 <!-- FORMULARIO PARA AGREGAR INGREDIENTES -->
 <div class="container user-form" style="width:40%;">
     <div> 
-        <form id="loginMember" role="form" action="<?php echo URL; ?>ingredientes/agregarIngrediente" method="post" enctype="multipart/form-data" data-parsley-validate>
+        <form id="formRegistrarIngrediente" role="form" action="<?php echo URL; ?>ingredientes/agregarIngrediente" method="post" enctype="multipart/form-data" data-parsley-validate onsubmit="alertaConfirmacion();">
             <h3>Agregar ingrediente</h3>
             <div class="form-group">
                 <Label>Clasificación:</Label>
@@ -76,3 +76,16 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    //Alerta de guardado exitoso!
+    function alertaConfirmacion(){
+        if($("#formRegistrarIngrediente").parsley().isValid()){
+            swal({
+                text: "Guardado exitoso!",
+                icon: "success",
+                button : false,
+            })
+        }
+    }
+</script>

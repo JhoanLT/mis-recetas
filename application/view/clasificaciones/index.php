@@ -1,7 +1,7 @@
-<!-- FORMULARIO DE REGISTRO DE RECETAS PARA EL USUARIO ADMINISTRADOR -->
+<!-- FORMULARIO DE REGISTRO DE CLASIFICACIONES PARA EL USUARIO ADMINISTRADOR -->
 <div class="container user-form" style="width:40%;">
     <div> 
-        <form id="loginMember" role="form" action="<?php echo URL; ?>clasificaciones/agregarClasificacion" method="post" data-parsley-validate>
+        <form id="formClasificacion" role="form" action="<?php echo URL; ?>clasificaciones/agregarClasificacion" method="post" data-parsley-validate onsubmit="alertaConfirmacion();">
             <h3>Agregar clasificación</h3>
             <div class="form-group">
                 <input 
@@ -11,7 +11,6 @@
                     placeholder="Nombre" 
                     name="nombre" 
                     required 
-                    data-parsley-pattern="^[a-zA-Z]+$"
                     data-parsley-trigger="keyup"
                 >
             </div>
@@ -60,18 +59,14 @@
 </div>
 
 <script>
-
-    $(document).ready(() => {
-        $('#loginMember').parsley();
-    });
-    
     //Alerta de guardado exitoso!
-    function alertaConfirmación(){
-        swal({
-            text: "Guardado exitoso!",
-            icon: "success",
-            button: "Continuar",
-        });
+    function alertaConfirmacion(){
+        if($("#formClasificacion").parsley().isValid()){
+            swal({
+                text: "Guardado exitoso!",
+                icon: "success",
+                button : false,
+            })
+        }
     }
-
 </script>
