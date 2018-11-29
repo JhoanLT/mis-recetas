@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <input type="submit" name="btnLogin" class="btnEnviar" value="Iniciar Sesión" />
+                        <input type="submit" name="btnLogin" class="btnEnviar" value="Iniciar sesión" />
                     </div>
                 </div>
             </div>
