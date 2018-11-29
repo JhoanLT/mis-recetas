@@ -18,11 +18,13 @@
 </div>
 
 <!-- Tabla para listar las recetas que han sido agregadas -->
-<div class="container contact-form">
+    
+<?php foreach ($recetas as $receta) { ?>
+<div class="container contact-form" style="width: 50%;">
     <div>
-        <h4>Mis recetas</h4>
+        <h6><?php echo count($receta) > 0 ? $receta[0]->nombre_receta : "Sin nombre" ?></h6>
     </div>
-    <table id="dataTable">
+    <table id="">
         <thead style="background-color: #ddd; font-weight: bold;">
         <tr>
             <td>Ingredientes</td>
@@ -30,15 +32,17 @@
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($recetas as $receta) { ?>
+        <?php foreach ($receta as $rec) { ?>
             <tr>
-                <td><?php if (isset($receta->nombre_ingrediente)) echo htmlspecialchars($receta->nombre_ingrediente, ENT_QUOTES, 'UTF-8'); ?></td>
-                <td><?php if (isset($receta->cantidad)) echo htmlspecialchars($receta->cantidad, ENT_QUOTES, 'UTF-8'); ?></td>
+                <td><?php if (isset($rec->nombre_ingrediente)) echo htmlspecialchars($rec->nombre_ingrediente, ENT_QUOTES, 'UTF-8'); ?></td>
+                <td><?php if (isset($rec->cantidad)) echo htmlspecialchars($rec->cantidad, ENT_QUOTES, 'UTF-8'); ?></td>
             </tr>
         <?php } ?>
         </tbody>
     </table>
 </div>
+
+<?php } ?>
 
 <script>
     //Alerta de guardado exitoso!

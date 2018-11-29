@@ -18,6 +18,8 @@ class RecetasController
     {
         $Ingrediente = new Ingrediente();
         $ingredientes = $Ingrediente->listarIngredientes();
+
+        //Se instancia el modelo de Receta y se consultan las recetas por Usuario
         $Receta = new Receta();
         $recetas = $Receta->listarRecetas();
 

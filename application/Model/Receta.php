@@ -47,19 +47,41 @@ class Receta extends Model
      * Listar las recetas del usuario
      */
     public function listarRecetas(){
+        $resultIngredientes = [];
         $idusuario = $_SESSION['usuario'];
-        $sql = "SELECT
-            receta.nombre AS nombre_receta,
-            ing.nombre AS nombre_ingrediente,
-            de_ing.cantidad
-        FROM
-            receta
-        JOIN detalle_receta_ingrediente de_ing ON de_ing.id_receta = receta.idreceta
-        JOIN ingrediente ing ON ing.idingrediente = de_ing.id_ingrediente
-        WHERE
-            receta.idusuario = $idusuario";
+
+        //Se consultan primero las recetas del usuario
+        $sql = "SELECT 
+                    receta.idreceta,
+                    receta.nombre
+                FROM receta
+                WHERE receta.idusuario = $idusuario";
         $query = $this->db->prepare($sql);
         $query->execute();
-        return $query->fetchAll();
+        $recetas = $query->fetchAll();
+
+        //Se recorren las recetas del usuario y en cada iteración se consultan los ingredientes para cada receta
+        foreach($recetas as $receta){
+            $sql = "SELECT
+                        receta.idreceta,
+                        receta.nombre AS nombre_receta,
+                        ing.nombre AS nombre_ingrediente,
+                        de_ing.cantidad
+                    FROM
+                        receta
+                    JOIN detalle_receta_ingrediente de_ing ON de_ing.id_receta = receta.idreceta
+                    JOIN ingrediente ing ON ing.idingrediente = de_ing.id_ingrediente
+                    WHERE
+                        receta.idusuario = $idusuario
+                    AND receta.idreceta  = $receta->idreceta";
+                    $query = $this->db->prepare($sql);
+                    $query->execute();
+                    $ingredientes = $query->fetchAll();
+
+            //Se hace un push al array que va a contener el resultado final
+            array_push($resultIngredientes, $ingredientes);
+        }
+
+        return $resultIngredientes;
     }
 }
