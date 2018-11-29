@@ -100,3 +100,6 @@ CREATE TABLE `detalle_receta_ingrediente` (
   CONSTRAINT `fk_ingrediente_detalle_receta_ingrediente` FOREIGN KEY (`id_ingrediente`) REFERENCES `ingrediente` (`idingrediente`),
   CONSTRAINT `fk_receta_detalle_receta_ingrediente` FOREIGN KEY (`id_receta`) REFERENCES `receta` (`idreceta`)
 ) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+
+/*INSERTAR USUARIO ADMINISTRADOR POR DEFECTO*/
+INSERT INTO `usuario` (`cedula`, `nombre`, `email`, `usuario`, `password`, `fk_rol_idrol`) VALUES ('12345', 'Administrador', 'admin@admin.com', 'admin', '81dc9bdb52d04dc20036dbd8313ed055', '1');
