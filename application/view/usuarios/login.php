@@ -2,7 +2,7 @@
 <div class="container user-form" style="width:40%;">
     <div> 
         <form id="loginMember" role="form" action="" method="post" data-parsley-validate>
-            <h3>Iniciar Sesión</h3>
+            <h3>Iniciar sesión</h3>
             <div class="form-group">
                 <input 
                     type="text" 
